@@ -12,7 +12,7 @@ public class DetallePedido {
     @Column
     private Double precio;
     @ManyToOne
-    private Producto platillo;
+    private Producto producto;
     @ManyToOne
     private Pedido pedido;
 
@@ -40,12 +40,12 @@ public class DetallePedido {
         this.precio = precio;
     }
 
-    public Producto getPlatillo() {
-        return platillo;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setPlatillo(Producto platillo) {
-        this.platillo = platillo;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public Pedido getPedido() {
@@ -57,7 +57,7 @@ public class DetallePedido {
     }
 
     public String getNombre(){
-        return this.platillo!= null ? this.platillo.getNombre() : "----";
+        return this.producto!= null ? this.producto.getNombre() : "----";
     }
 
     public Double getSubTotal(){
