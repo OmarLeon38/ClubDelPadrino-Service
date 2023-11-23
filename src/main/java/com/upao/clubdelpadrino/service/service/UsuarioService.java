@@ -30,8 +30,6 @@ public class UsuarioService {
         }
     }
 
-    //Guardar credenciales
-
     public GenericResponse guardarUsuario(Usuario u){
         Optional<Usuario> optU = this.repository.findById(u.getId());
         int idf = optU.isPresent() ? optU.get().getId() : 0;

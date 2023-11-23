@@ -10,9 +10,9 @@ public class Categoria {
     @Column(length = 100)
     private String nombre;
     @Column
-    private boolean Vigencia;
+    private boolean vigencia;
     @OneToOne
-    private Documento foto;
+    private Foto foto;
 
     public int getId() {
         return id;
@@ -31,18 +31,18 @@ public class Categoria {
     }
 
     public boolean isVigencia() {
-        return Vigencia;
+        return vigencia;
     }
 
     public void setVigencia(boolean vigencia) {
-        Vigencia = vigencia;
+        this.vigencia = vigencia;
     }
 
-    public Documento getFoto() {
+    public Foto getFoto() {
         return foto;
     }
 
-    public void setFoto(Documento foto) {
+    public void setFoto(Foto foto) {
         this.foto = foto;
     }
 }

@@ -19,7 +19,6 @@ public class ClienteService {
         this.repository = repository;
     }
 
-    //Método guardar y actualizar cliente
     public GenericResponse save(Cliente c){
         Optional<Cliente> opt = this.repository.findById(c .getId());
         int idf = opt.isPresent() ? opt.get().getId() : 0;
@@ -27,16 +26,13 @@ public class ClienteService {
             if (repository.existByDoc(c.getNumDoc().trim()) == 1){
                 return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "Error: Ya existe un cliente con ese número de DNI", null);
             }else {
-                //Guarda
                 c.setId(idf);
                 return new GenericResponse(TIPO_DATA, RPTA_OK, "Cliente registrado correctamente", this.repository.save(c));
             }
         }else {
-            //Actualizar registro
             if (repository.existByDocForUpdate(c.getNumDoc().trim(), c.getId()) == 1){
                 return new GenericResponse(TIPO_RESULT, RPTA_WARNING, "Error: Ya existe un cliente con esas credenciales", null);
             }else {
-                //Actualiza
                 c.setId(idf);
                 return new GenericResponse(TIPO_DATA, RPTA_OK, "Datos del cliente actualizados", this.repository.save(c));
             }

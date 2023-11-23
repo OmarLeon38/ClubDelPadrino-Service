@@ -27,7 +27,7 @@ public class Cliente {
     @Column(length = 9)
     private String telefono;
     @OneToOne
-    private Documento foto;
+    private Foto foto;
 
     public int getId() {
         return id;
@@ -93,11 +93,11 @@ public class Cliente {
         this.distrito = distrito;
     }
 
-    public Documento getFoto() {
+    public Foto getFoto() {
         return foto;
     }
 
-    public void setFoto(Documento foto) {
+    public void setFoto(Foto foto) {
         this.foto = foto;
     }
 
