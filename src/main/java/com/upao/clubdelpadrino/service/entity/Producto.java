@@ -16,7 +16,7 @@ public class Producto {
     @Column
     private int stock;
     @Column(length = 500)
-    private String descripcionPlato;
+    private String descripcionProducto;
     @OneToOne
     private Categoria categoria;
     @Column
@@ -64,12 +64,12 @@ public class Producto {
         this.stock = stock;
     }
 
-    public String getDescripcionPlatillo() {
-        return descripcionPlato;
+    public String getDescripcionProducto() {
+        return descripcionProducto;
     }
 
-    public void setDescripcionPlatillo(String descripcionPlatillo) {
-        this.descripcionPlato = descripcionPlatillo;
+    public void setDescripcionProducto(String descripcionProducto) {
+        this.descripcionProducto = descripcionProducto;
     }
 
     public Categoria getCategoria() {

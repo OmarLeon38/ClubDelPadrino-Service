@@ -83,17 +83,17 @@ public class FotoService {
 
     public GenericResponse deleteById(Long id) {
         boolean deleted = false;
-        Optional<Foto> documento = repo.findById(id);
-        if (documento.isPresent()) {
-            deleted = storageService.deleteFile(documento.get().getCompleteFileName());
-            int deletedFromBD = repo.deleteImageById(documento.get().getId());
+        Optional<Foto> foto = repo.findById(id);
+        if (foto.isPresent()) {
+            deleted = storageService.deleteFile(foto.get().getCompleteFileName());
+            int deletedFromBD = repo.deleteImageById(foto.get().getId());
             if (deletedFromBD == 1 && deleted) {
                 return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, deleted);
             } else {
                 return new GenericResponse(TIPO_DATA, RPTA_WARNING, OPERACION_ERRONEA, deleted);
             }
         } else {
-            return new GenericResponse(TIPO_DATA, RPTA_ERROR, "No se ha encontrado ningún documento con ese Id", deleted);
+            return new GenericResponse(TIPO_DATA, RPTA_ERROR, "No se ha encontrado ninguna foto con ese Id", deleted);
         }
     }
 }
