@@ -8,12 +8,16 @@ import com.upao.clubdelpadrino.service.repository.DetallePedidoRepository;
 import com.upao.clubdelpadrino.service.repository.PedidoRepository;
 import com.upao.clubdelpadrino.service.repository.ProductoRepository;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static com.upao.clubdelpadrino.service.utils.Global.*;
 
@@ -66,4 +70,11 @@ public class PedidoService {
             return new GenericResponse(TIPO_DATA, RPTA_ERROR, OPERACION_INCORRECTA, "Pedido inválido");
         }
     }
+
+//    @NotNull
+//    public ResponseEntity<Resource> exportInvoice(int idClient, int idOrden) {
+//        Optional<Pedido> optPedido = this.repository.findByIdAndClienteId(idClient, idOrden);
+
+
+//    }
 }
