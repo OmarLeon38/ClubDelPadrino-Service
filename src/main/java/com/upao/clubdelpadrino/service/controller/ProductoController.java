@@ -2,13 +2,11 @@ package com.upao.clubdelpadrino.service.controller;
 
 import com.upao.clubdelpadrino.service.service.ProductoService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/producto")
+@RequestMapping(value = "api/producto", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductoController {
     private final ProductoService service;
 

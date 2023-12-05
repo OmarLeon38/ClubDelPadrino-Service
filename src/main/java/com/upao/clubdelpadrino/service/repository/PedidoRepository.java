@@ -11,6 +11,6 @@ public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
     @Query("SELECT P FROM Pedido P WHERE P.cliente.id = :idClient")
     Iterable<Pedido> obtenerMisCompras(int idClient);
 
-//    @Query("SELECT P FROM Pedido P WHERE P.id=:idOrden AND P.cliente.id=:idClient")
-//    Optional<Pedido> findByIdAndClienteId( int idClient, int idOrden);
+    @Query("SELECT P FROM Pedido P WHERE P.id=:idOrden AND P.cliente.id=:idClient")
+    Optional<Pedido> findByIdAndClienteId( int idClient, int idOrden);
 }

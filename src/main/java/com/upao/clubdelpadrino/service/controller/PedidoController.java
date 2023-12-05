@@ -5,13 +5,14 @@ import com.upao.clubdelpadrino.service.entity.dto.PedidoDetalleDTO;
 import com.upao.clubdelpadrino.service.service.PedidoService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/pedido")
+@RequestMapping(value = "api/pedido", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PedidoController {
     private final PedidoService service;
 
@@ -35,7 +36,8 @@ public class PedidoController {
     }
 
     //EXPORTAR PDF
-//    public ResponseEntity<Resource> exportInvoice(@RequestParam int idClient, @RequestParam int idOrden){
-//        return this.service.exportInvoice(idClient, idOrden);
+    @GetMapping("exportInvoice")
+    public ResponseEntity<Resource> exportInvoice(@RequestParam int idClient, @RequestParam int idOrden){
+        return this.service.exportInvoice(idClient, idOrden);
     }
-//}
+}

@@ -4,13 +4,14 @@ import com.upao.clubdelpadrino.service.entity.Foto;
 import com.upao.clubdelpadrino.service.service.FotoService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("api/foto")
+@RequestMapping(value = "api/foto", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FotoController {
     private FotoService service;
 

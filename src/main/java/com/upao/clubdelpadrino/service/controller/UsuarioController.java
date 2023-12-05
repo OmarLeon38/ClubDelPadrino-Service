@@ -3,12 +3,13 @@ package com.upao.clubdelpadrino.service.controller;
 import com.upao.clubdelpadrino.service.entity.Usuario;
 import com.upao.clubdelpadrino.service.service.UsuarioService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("api/usuario")
+@RequestMapping(value = "api/usuario", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioController {
     private final UsuarioService service;
 
