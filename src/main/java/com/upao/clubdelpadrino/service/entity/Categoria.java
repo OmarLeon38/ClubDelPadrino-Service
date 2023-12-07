@@ -9,8 +9,6 @@ public class Categoria {
     private int id;
     @Column(length = 100)
     private String nombre;
-    @Column(length = 9)
-    private boolean vigencia;
     @OneToOne
     private Foto foto;
 
@@ -28,14 +26,6 @@ public class Categoria {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public boolean isVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(boolean vigencia) {
-        this.vigencia = vigencia;
     }
 
     public Foto getFoto() {

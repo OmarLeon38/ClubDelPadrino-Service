@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CategoriaRepository extends CrudRepository<Categoria, Integer> {
 
-    @Query("SELECT C FROM Categoria C WHERE C.vigencia IS TRUE")
+    @Query("SELECT C FROM Categoria C")
     Iterable<Categoria> listarCategoriasActivas();
 }

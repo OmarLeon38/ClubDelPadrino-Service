@@ -11,8 +11,6 @@ public class Usuario {
     private String email;
     @Column(length = 20)
     private String clave;
-    @Column
-    private boolean vigencia;
     @OneToOne
     private Cliente cliente;
 
@@ -38,14 +36,6 @@ public class Usuario {
 
     public void setClave(String clave) {
         this.clave = clave;
-    }
-
-    public boolean isVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(boolean vigencia) {
-        this.vigencia = vigencia;
     }
 
     public Cliente getCliente() {

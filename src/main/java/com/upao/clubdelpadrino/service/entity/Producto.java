@@ -20,8 +20,6 @@ public class Producto {
     @OneToOne
     private Categoria categoria;
     @Column
-    private boolean vigencia;
-    @Column
     private boolean recomendado;
 
     public int getId() {
@@ -78,14 +76,6 @@ public class Producto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-    public boolean isVigencia() {
-        return vigencia;
-    }
-
-    public void setVigencia(boolean vigencia) {
-        this.vigencia = vigencia;
     }
 
     public boolean isRecomendado() {
