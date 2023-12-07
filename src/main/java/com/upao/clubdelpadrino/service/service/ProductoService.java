@@ -26,13 +26,7 @@ public class ProductoService {
         return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, this.repository.listarProductosPorCategoria(idC));
     }
 
-    public GenericResponse save(Producto producto) {
-        try {
-            Producto savedProducto = repository.save(producto);
-            return new GenericResponse(TIPO_DATA, RPTA_OK, "Producto guardado exitosamente", savedProducto);
-        } catch (Exception e) {
-            // Manejo de excepciones
-            return new GenericResponse(TIPO_DATA, RPTA_ERROR, "Error al guardar el producto: " + e.getMessage(), null);
-        }
+    public Producto guardarProducto(Producto producto) {
+        return repository.save(producto);
     }
 }

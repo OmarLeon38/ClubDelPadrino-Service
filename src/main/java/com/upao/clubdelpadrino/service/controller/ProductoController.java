@@ -1,6 +1,5 @@
 package com.upao.clubdelpadrino.service.controller;
 
-import com.upao.clubdelpadrino.service.entity.Foto;
 import com.upao.clubdelpadrino.service.entity.Producto;
 import com.upao.clubdelpadrino.service.service.ProductoService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
@@ -27,7 +26,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public GenericResponse agregarProducto(@RequestBody Producto producto) {
-        return this.service.save(producto);
+    public Producto agregarProducto(@RequestBody Producto producto) {
+        return this.service.guardarProducto(producto);
     }
 }
