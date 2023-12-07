@@ -1,5 +1,7 @@
 package com.upao.clubdelpadrino.service.controller;
 
+import com.upao.clubdelpadrino.service.entity.Foto;
+import com.upao.clubdelpadrino.service.entity.Producto;
 import com.upao.clubdelpadrino.service.service.ProductoService;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
 import org.springframework.http.MediaType;
@@ -15,12 +17,17 @@ public class ProductoController {
     }
 
     @GetMapping
-    public GenericResponse listarProductosRecomendados(){
+    public GenericResponse listarProductosRecomendados() {
         return this.service.listarProductosRecomendados();
     }
 
     @GetMapping("/{idC}")
-    public GenericResponse listarProductosPorCategoria(@PathVariable int idC){
+    public GenericResponse listarProductosPorCategoria(@PathVariable int idC) {
         return this.service.listarProductosPorCategoria(idC);
+    }
+
+    @PostMapping
+    public GenericResponse agregarProducto(@RequestBody Producto producto) {
+        return this.service.save(producto);
     }
 }

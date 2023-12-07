@@ -1,5 +1,6 @@
 package com.upao.clubdelpadrino.service.service;
 
+import com.upao.clubdelpadrino.service.entity.Producto;
 import com.upao.clubdelpadrino.service.repository.ProductoRepository;
 import com.upao.clubdelpadrino.service.utils.GenericResponse;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,21 @@ public class ProductoService {
         this.repository = repository;
     }
 
-    public GenericResponse listarProductosRecomendados(){
+    public GenericResponse listarProductosRecomendados() {
         return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, this.repository.listarProductosRecomendados());
     }
 
-    public GenericResponse listarProductosPorCategoria(int idC){
+    public GenericResponse listarProductosPorCategoria(int idC) {
         return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, this.repository.listarProductosPorCategoria(idC));
+    }
+
+    public GenericResponse save(Producto producto) {
+        try {
+            Producto savedProducto = repository.save(producto);
+            return new GenericResponse(TIPO_DATA, RPTA_OK, "Producto guardado exitosamente", savedProducto);
+        } catch (Exception e) {
+            // Manejo de excepciones
+            return new GenericResponse(TIPO_DATA, RPTA_ERROR, "Error al guardar el producto: " + e.getMessage(), null);
+        }
     }
 }
