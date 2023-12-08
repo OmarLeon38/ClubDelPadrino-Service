@@ -86,7 +86,7 @@ public class PedidoService {
         if (optPedido.isPresent()) {
             try {
                 final Pedido pedido = optPedido.get();
-                final File file = ResourceUtils.getFile("classpath:exportInvoice.jasper");
+                final File file = ResourceUtils.getFile("classpath:exportFactura.jasper");
                 final File imgLogo = ResourceUtils.getFile("classpath:imagenes/logoCDP.jpeg");
                 final JasperReport report = (JasperReport) JRLoader.loadObject(file);
 
