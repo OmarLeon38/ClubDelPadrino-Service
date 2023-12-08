@@ -12,6 +12,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +25,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -83,24 +85,30 @@ public class PedidoService {
     public ResponseEntity<Resource> exportInvoice(int idClient, int idOrden) {
         Optional<Pedido> optPedido = this.repository.findByIdAndClienteId(idClient, idOrden);
         Double rpta = this.detallePedidoRepository.totalByIdCustomer(idClient, idOrden);
+
         if (optPedido.isPresent()) {
             try {
                 final Pedido pedido = optPedido.get();
-                final File file = ResourceUtils.getFile("classpath:exportFactura.jasper");
-                final File imgLogo = ResourceUtils.getFile("classpath:imagenes/logoCDP.jpeg");
-                final JasperReport report = (JasperReport) JRLoader.loadObject(file);
+                final Resource reportResource = new ClassPathResource("exportFactura.jasper");
+                final Resource imgLogoResource = new ClassPathResource("imagenes/logoCDP.jpeg");
+
+                final InputStream reportInputStream = reportResource.getInputStream();
+                final InputStream imgLogoInputStream = imgLogoResource.getInputStream();
+
+                final JasperReport report = (JasperReport) JRLoader.loadObject(reportInputStream);
 
                 final HashMap<String, Object> parameters = new HashMap<>();
                 parameters.put("nombreCliente", pedido.getCliente().getNombreCompletoCiente());
-                parameters.put("imgLogo", new FileInputStream(imgLogo));
+                parameters.put("imgLogo", imgLogoInputStream);
                 parameters.put("total", rpta);
                 parameters.put("dsInvoice", new JRBeanCollectionDataSource((Collection<?>) this.detallePedidoRepository.findByPedido(idOrden)));
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
                 byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
+
                 String sdf = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date());
                 StringBuilder stringBuilder = new StringBuilder().append("Boleta de venta:");
-                ContentDisposition contentDisposition = ContentDisposition.builder("attachement")
+                ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
                         .filename(stringBuilder.append(pedido.getId())
                                 .append("fecha:")
                                 .append(sdf)
@@ -109,15 +117,18 @@ public class PedidoService {
                         .build();
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentDisposition(contentDisposition);
-                return ResponseEntity.ok().contentLength((long) reporte.length)
+
+                return ResponseEntity.ok().contentLength(reporte.length)
                         .contentType(MediaType.APPLICATION_PDF)
                         .headers(headers).body(new ByteArrayResource(reporte));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             return ResponseEntity.noContent().build();
         }
-        return null;
+        
+        return ResponseEntity.noContent().build();
     }
+
 }
